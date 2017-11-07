@@ -3,6 +3,10 @@
 #include "Eigen/Dense"
 
 class KalmanFilter {
+private:
+  Eigen::VectorXd ComputeLaserMeasure();
+  Eigen::VectorXd ComputeRadarMeasure();
+  void ComputeUpdate(const Eigen::VectorXd &z, const Eigen::VectorXd &z_pred);
 public:
 
   // state vector

@@ -17,7 +17,7 @@ Tips for setting up your environment can be found [here](https://classroom.udaci
 3. kalman_filter.cpp: Kalman and extended kalman filter implementation.
 4. kalman_filter.h: Header definitions.
 5. tools.cpp: Include utils function(Error measurement, Jacobian calculation and angule fixing)
-6: tools.h: Header definitions.
+6. tools.h: Header definitions.
 
 ## Dependencies
 

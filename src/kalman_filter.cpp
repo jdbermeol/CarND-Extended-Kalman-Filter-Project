@@ -11,6 +11,18 @@ KalmanFilter::KalmanFilter() {}
 
 KalmanFilter::~KalmanFilter() {}
 
+float KalmanFilter::angle(float a){
+  float PI = 4 * atan(1);
+  while(a > PI || a < -1 * PI){
+    if(a > PI){
+      a -= (2 * PI);
+    } else {
+      a += (2 * PI);
+    }
+  }
+  return a;
+}
+
 void KalmanFilter::Init(VectorXd &x_in, MatrixXd &P_in, MatrixXd &F_in,
                         MatrixXd &H_in, MatrixXd &R_in, MatrixXd &Q_in) {
   x_ = x_in;
@@ -34,8 +46,7 @@ VectorXd KalmanFilter::ComputeRadarMeasure() {
   return z_pred;
 }
 
-void KalmanFilter::ComputeUpdate(const VectorXd &z, const VectorXd &z_pred) {
-  VectorXd y = z - z_pred;
+void KalmanFilter::ComputeUpdate(const VectorXd &y) {
   MatrixXd Ht = H_.transpose();
   MatrixXd S = H_ * P_ * Ht + R_;
   MatrixXd Si = S.inverse();
@@ -56,12 +67,15 @@ void KalmanFilter::Predict() {
 
 void KalmanFilter::Update(const VectorXd &z) {
   VectorXd z_pred = ComputeLaserMeasure();
-  ComputeUpdate(z, z_pred);
+  VectorXd y = z - z_pred;
+  ComputeUpdate(y);
 }
 
 void KalmanFilter::UpdateEKF(const VectorXd &z) {
   VectorXd z_pred = ComputeRadarMeasure();
-  ComputeUpdate(z, z_pred);
+  VectorXd y = z - z_pred;
+  y(1) = angle(y[1]);
+  ComputeUpdate(y);
 }
 
 

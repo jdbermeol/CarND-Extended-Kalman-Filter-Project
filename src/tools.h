@@ -28,12 +28,6 @@ public:
   * A helper method to calculate Jacobians.
   */
   MatrixXd CalculateJacobian(const VectorXd& x_state);
-
-  /**
-  * A helper method to fix angule to -PI to PI.
-  */
-  float angle(float a);
-
 };
 
 #endif /* TOOLS_H_ */

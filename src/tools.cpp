@@ -5,8 +5,6 @@ using Eigen::VectorXd;
 using Eigen::MatrixXd;
 using std::vector;
 
-#define PI 3.14159265
-
 Tools::Tools() {}
 
 Tools::~Tools() {}
@@ -62,15 +60,4 @@ MatrixXd Tools::CalculateJacobian(const VectorXd& x_state) {
         py*(vx*py - vy*px)/c3, px*(px*vy - py*vx)/c3, px/c2, py/c2;
   
   return Hj;
-}
-
-float Tools::angle(float a){
-  while(a > PI || a < -PI){
-    if(a > PI){
-      a -= (2 * PI);
-    } else {
-      a += (2 * PI);
-    }
-  }
-  return a;
 }

@@ -6,7 +6,13 @@ class KalmanFilter {
 private:
   Eigen::VectorXd ComputeLaserMeasure();
   Eigen::VectorXd ComputeRadarMeasure();
-  void ComputeUpdate(const Eigen::VectorXd &z, const Eigen::VectorXd &z_pred);
+  void ComputeUpdate(const Eigen::VectorXd &y);
+
+  /**
+  * A helper method to fix angule to -PI to PI.
+  */
+  float angle(float a);
+
 public:
 
   // state vector
